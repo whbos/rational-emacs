@@ -1,5 +1,19 @@
 ;;; rational-completion.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Setup completion packages. Completion in this sense is more like
+;; narrowing, allowing the user to find matches based on minimal
+;; inputs and "complete" the commands, variables, etc from the
+;; narrowed list of possible choices.
+
+;;; Code:
+
 (straight-use-package 'vertico)
 (straight-use-package 'consult)
 (straight-use-package 'orderless)
@@ -17,6 +31,8 @@ folder, otherwise delete a word"
         (delete-minibuffer-contents))
     (backward-kill-word arg)))
 
+;;;; Vertico
+
 (require 'vertico)
 (require 'vertico-directory "extensions/vertico-directory.el")
 
@@ -31,6 +47,8 @@ folder, otherwise delete a word"
 ;; Start Vertico
 (vertico-mode 1)
 
+;;;; Marginalia
+
 ;; Configure Marginalia
 (require 'marginalia)
 (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
@@ -42,15 +60,21 @@ folder, otherwise delete a word"
 
 (setq completion-in-region-function #'consult-completion-in-region)
 
+;;;; Orderless
+
 ;; Set up Orderless for better fuzzy matching
 (require 'orderless)
 (customize-set-variable 'completion-styles '(orderless))
 (customize-set-variable 'completion-category-overrides '((file (styles . (partial-completion)))))
 (setq completion-category-defaults nil)
 
+;;;; Embark
+
+(global-set-key [remap describe-bindings] #'embark-bindings)
 (global-set-key (kbd "C-.") 'embark-act)
 
 ;; Use Embark to show bindings in a key prefix with `C-h`
 (setq prefix-help-command #'embark-prefix-help-command)
 
 (provide 'rational-completion)
+;;; rational-completion.el ends here
