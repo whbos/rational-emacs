@@ -23,8 +23,11 @@
 ;; Set further font and theme customizations
 (custom-set-variables
    '(rational-ui-default-font
-     '(:font "JetBrains Mono" :weight 'light :height 185)))
+     '(:font "JetBrains Mono" :weight light :height 185)))
 
 (load-theme 'doom-snazzy t)
+
+;; To not load `custom.el' after `config.el', uncomment this line.
+;; (setq rational-load-custom-file nil)
 
 ;;; example-config.el ends here
