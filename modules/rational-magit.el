@@ -15,5 +15,7 @@
 
 (straight-use-package 'magit-todos)
 
+(magit-todos-mode t)
+
 (provide 'rational-magit)
 ;;; rational-magit.el ends here
